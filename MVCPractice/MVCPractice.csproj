@@ -142,6 +142,10 @@
     <Compile Include="Migrations\202007161939537_initialmig.designer.cs">
       <DependentUpon>202007161939537_initialmig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007162004447_seeddb.cs" />
+    <Compile Include="Migrations\202007162004447_seeddb.designer.cs">
+      <DependentUpon>202007162004447_seeddb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -307,6 +311,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202007161939537_initialmig.resx">
       <DependentUpon>202007161939537_initialmig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007162004447_seeddb.resx">
+      <DependentUpon>202007162004447_seeddb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
