@@ -30,8 +30,7 @@ namespace MVCPractice.Controllers
                     return View(indexData);
                 }
                 return View();
-            }    
-            
+            }             
         }
 
         [HttpPost]
@@ -62,17 +61,14 @@ namespace MVCPractice.Controllers
 
         public ActionResult Edit(int id)
         {
-            var person = _context.Persons.SingleOrDefault(p => p.Id == id);
+            var _person = _context.Persons.SingleOrDefault(p => p.Id == id);
 
-            if (person == null)
+            if (_person == null)
             {
                 return HttpNotFound();
             }
 
-            var viewModel = new PersonFormViewModel
-            {
-                Person = person
-            };
+            var viewModel = new PersonFormViewModel(_person){};
 
             return View("Edit", viewModel);
         }
@@ -86,23 +82,18 @@ namespace MVCPractice.Controllers
                 return HttpNotFound();
             }
 
-            var viewModel = new PersonFormViewModel
-            {
-                Person = person
-            };
+            var viewModel = new PersonFormViewModel(person) { };
 
             return View("Details", viewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Person person)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new PersonFormViewModel
-                {
-                    Person = person
-                };
+                var viewModel = new PersonFormViewModel(person) { };
                 return View("Create", viewModel);
             }
             if (person.Id == 0)

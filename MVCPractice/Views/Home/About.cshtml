@@ -1,7 +1,25 @@
-﻿@{
+﻿@model MVCPractice.Models.Person
+
+@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<div class="row" style="margin-bottom: 5px">
+    <div class="col-md-3">
+        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label label-blue" })
+        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger pull-right" })
+    </div>
+
+
+    @if (Model != null)
+    {
+        <div class="col-md-9">
+            
+            @Html.TextAreaFor(model => model, new { @class = " col-xs-12 editorHtml formControlWithOutBackground", @rows = "10", @style = "color: #005070;border-radius: 16px;border: solid 2px #005070;" })
+        </div>
+    }
+    </div>
