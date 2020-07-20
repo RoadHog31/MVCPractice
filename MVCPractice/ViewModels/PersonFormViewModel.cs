@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MVCPractice.ViewModels
 {
-    public class PersonViewModel
+    public class PersonFormViewModel
     {
         public Person Person { get; set; }
     }
