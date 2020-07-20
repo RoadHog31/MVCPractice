@@ -1,5 +1,3 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MVCPractice.MVCGridConfig), "RegisterGrids")]
-
 namespace MVCPractice
 {
     using System;
@@ -10,23 +8,30 @@ namespace MVCPractice
 
     using MVCGrid.Models;
     using MVCGrid.Web;
+    using MVCPractice.Models;
+    using MVCPractice.Data;
 
     public static class MVCGridConfig 
     {
         public static void RegisterGrids()
-        {
-            /*
-            MVCGridDefinitionTable.Add("UsageExample", new MVCGridBuilder<YourModelItem>()
+        {            
+            MVCGridDefinitionTable.Add("PersonTestGrid", new MVCGridBuilder<Person>()
                 .WithAuthorizationType(AuthorizationType.AllowAnonymous)
                 .AddColumns(cols =>
                 {
                     // Add your columns here
-                    cols.Add().WithColumnName("UniqueColumnName")
-                        .WithHeaderText("Any Header")
-                        .WithValueExpression(i => i.YourProperty); // use the Value Expression to return the cell text for this column
-                    cols.Add().WithColumnName("UrlExample")
-                        .WithHeaderText("Edit")
-                        .WithValueExpression((i, c) => c.UrlHelper.Action("detail", "demo", new { id = i.Id }));
+                    cols.Add().WithColumnName("First Name")
+                        .WithHeaderText("First Name")
+                        .WithValueExpression(i => i.FirstName); // use the Value Expression to return the cell text for this column
+                    cols.Add().WithColumnName("Last Name")
+                        .WithHeaderText("Last Name")
+                        .WithValueExpression(i => i.LastName);
+                    cols.Add().WithColumnName("Age")
+                        .WithHeaderText("Age")
+                        .WithValueExpression(i => i.Age.ToString());
+                    cols.Add().WithColumnName("Is Active?")
+                        .WithHeaderText("Is Active")
+                        .WithValueExpression(i => i.IsActive.ToString());
                 })
                 .WithRetrieveDataMethod((context) =>
                 {
@@ -34,15 +39,15 @@ namespace MVCPractice
                     // Use Entity Framework, a module from your IoC Container, or any other method.
                     // Return QueryResult object containing IEnumerable<YouModelItem>
 
-                    return new QueryResult<YourModelItem>()
+                    return new QueryResult<Person>()
                     {
-                        Items = new List<YourModelItem>(),
+                        Items = new List<Person>(),
                         TotalRecords = 0 // if paging is enabled, return the total number of records of all pages
                     };
 
                 })
             );
-            */
+            
         }
     }
 }

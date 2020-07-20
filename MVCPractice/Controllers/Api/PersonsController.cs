@@ -18,6 +18,7 @@ namespace MVCPractice.Controllers.Api
         {
             _context = new ApplicationDbContext();
         }
+
         //Get /api/persons
         public IEnumerable<Person> GetPersons() {
 
@@ -51,6 +52,7 @@ namespace MVCPractice.Controllers.Api
         }
 
         //PUT /api/persons/1
+        [HttpPut]
         public void UpdatePerson(int Id, Person person)
         {
             if (!ModelState.IsValid)

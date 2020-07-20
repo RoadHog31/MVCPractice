@@ -1,3 +1,5 @@
+using AutoMapper;
+using MVCPractice.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,9 @@ namespace MVCPractice
     {
         protected void Application_Start()
         {
+            //Built in automapper class see App_Start MappingProfile.
+            Mapper.Initialize(p => p.AddProfile<MappingProfile>());
+            MVCGridConfig.RegisterGrids();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

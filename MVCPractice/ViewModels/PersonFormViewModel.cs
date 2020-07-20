@@ -9,8 +9,6 @@ namespace MVCPractice.ViewModels
 {
     public class PersonFormViewModel
     {
-        private Person person1;
-
         public int? Id { get; set; }
 
         [Required]
@@ -41,9 +39,6 @@ namespace MVCPractice.ViewModels
             IsActive = person.IsActive;
         }
 
-        public PersonFormViewModel(Person person, Person person1) : this(person)
-        {
-            this.person1 = person1;
-        }
+        
     }
 }

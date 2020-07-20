@@ -1,0 +1,17 @@
+﻿@model IEnumerable<MVCPractice.Models.Person>
+@using MVCGrid.Web
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="panel panel-default">
+    <div class="panel-body">        
+        @Html.MVCGrid("PersonTestGrid")
+    </div>
+</div>
