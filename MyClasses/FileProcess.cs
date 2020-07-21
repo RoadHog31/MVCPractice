@@ -9,7 +9,7 @@ namespace MyClasses
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentException("fileName");
+                throw new ArgumentNullException("fileName");
             }
 
             return File.Exists(fileName);
