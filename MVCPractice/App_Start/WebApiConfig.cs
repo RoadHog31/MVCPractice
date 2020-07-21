@@ -9,6 +9,9 @@ namespace MVCPractice
     {
         public static void Register(HttpConfiguration config)
         {
+            //TO DO: See Camel notation for json - Mosh.
+           var settings = config.Formatters.JsonFormatter.SerializerSettings;
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

@@ -39,11 +39,13 @@ namespace MVCPractice
                     // Use Entity Framework, a module from your IoC Container, or any other method.
                     // Return QueryResult object containing IEnumerable<YouModelItem>
 
-                    return new QueryResult<Person>()
+                    var result = new QueryResult<Person>();
+                    using (var db = new ApplicationDbContext())
                     {
-                        Items = new List<Person>(),
-                        TotalRecords = 0 // if paging is enabled, return the total number of records of all pages
-                    };
+                        //TO DO: p.IsActive only returns active rows not all rows.
+                        result.Items = db.Persons.Where(p => p.IsActive).ToList();
+                    }
+                    return result;
 
                 })
             );

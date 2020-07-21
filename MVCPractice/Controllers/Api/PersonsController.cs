@@ -1,4 +1,6 @@
-﻿using MVCPractice.Data;
+﻿using AutoMapper;
+using MVCPractice.Data;
+using MVCPractice.Dtos;
 using MVCPractice.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,6 @@ namespace MVCPractice.Controllers.Api
 {
     public class PersonsController : ApiController
     {
-
         private ApplicationDbContext _context;
 
         public PersonsController()
@@ -20,13 +21,13 @@ namespace MVCPractice.Controllers.Api
         }
 
         //Get /api/persons
-        public IEnumerable<Person> GetPersons() {
+        public IEnumerable<PersonDto> GetPersons() {
 
-          return  _context.Persons.ToList();
+          return  _context.Persons.ToList().Select(Mapper.Map<Person, PersonDto>);
         }
 
         //Get /api/person/1
-        public Person GetPerson(int id)
+        public PersonDto GetPerson(int id)
         {
             var person = _context.Persons.SingleOrDefault(p => p.Id == id);
 
@@ -34,26 +35,31 @@ namespace MVCPractice.Controllers.Api
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            return person;
+            return Mapper.Map<Person, PersonDto>(person);
         } 
 
         //Post /api/persons
+        //TODO finish api section- Mosh
         [HttpPost]
-        public Person CreatePerson(Person person)
+        public PersonDto CreatePerson(PersonDto persondto)
         {
             if (!ModelState.IsValid)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
-            }
+            }          
+
+            var person = Mapper.Map<PersonDto, Person>(persondto);
             _context.Persons.Add(person);
             _context.SaveChanges();
 
-            return person;
+            persondto.Id = person.Id;
+
+            return persondto;
         }
 
         //PUT /api/persons/1
         [HttpPut]
-        public void UpdatePerson(int Id, Person person)
+        public void UpdatePerson(int Id, PersonDto persondto)
         {
             if (!ModelState.IsValid)
             {
@@ -67,11 +73,7 @@ namespace MVCPractice.Controllers.Api
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            //TO DO: Use AutoMapper here to map these...
-            personInDb.FirstName = person.FirstName;
-            personInDb.LastName = person.LastName;
-            personInDb.Age = person.Age;
-            personInDb.IsActive = person.IsActive;
+            Mapper.Map(persondto, personInDb);        
 
             _context.SaveChanges();
         }
